@@ -1,6 +1,6 @@
 # random_wallpaper_url
 Retrieves random wallpaper URL from https://wall.alphacoders.com/
-The URL then could be used by any external downloader
+The URL then could be used with any external downloader
 
 ```terminal
 wget $(python random_wallpaper_url.py)
