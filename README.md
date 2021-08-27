@@ -13,7 +13,7 @@ wget --limit-rate=20k -O /tmp/background.jpg $(python random_wallpaper_url.py) &
 
 In case of gnome-shell (tested in Ubuntu 20.04):
 ```
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 PID=$(pgrep -f 'gnome-session' | head -n1)
 DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
 gsettings set org.gnome.desktop.background picture-uri $(python3 random_wallpaper_url.py)
