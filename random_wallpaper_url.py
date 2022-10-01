@@ -19,7 +19,7 @@ def _get_big_url(url):
 def get_wallpaper_url(url):
     soup = BeautifulSoup(requests.get(url + _get_big_url(url), headers=headers).text, features="lxml")
 
-    return soup.find("div", {"class": "center img-container-desktop"}).find("a")["href"]
+    return soup.find("div", {"class": "center img-container-desktop"}).find("img")["src"]
 
 
 if __name__ == "__main__":
