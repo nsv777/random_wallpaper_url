@@ -1,7 +1,7 @@
 # import pprint
 import re
 
-import requests
+import cloudscraper
 from bs4 import BeautifulSoup
 
 alphacoders_url = "https://wall.alphacoders.com/"
@@ -10,18 +10,20 @@ headers = {
 }
 
 
-def _get_big_url(url):
-    soup = BeautifulSoup(requests.get(url + "random.php", headers=headers).text, features="lxml")
+def _get_big_url(url, scraper):
+    soup = BeautifulSoup(scraper.get(url + "random.php", headers=headers).text, features="lxml")
 
     return soup.find("a", {"href": re.compile('big\.php\?i=\d+')})["href"]
 
 
 def get_wallpaper_url(url):
-    soup = BeautifulSoup(requests.get(url + _get_big_url(url), headers=headers).text, features="lxml")
+    scraper = cloudscraper.create_scraper(delay=10, browser='chrome')
+    soup = BeautifulSoup(scraper.get(url + _get_big_url(url=url, scraper=scraper), headers=headers).text, features="lxml")
 
     return soup.find("div", {"class": "center img-container-desktop"}).find("img")["src"]
 
 
 if __name__ == "__main__":
     # pp = pprint.PrettyPrinter()
-    print(get_wallpaper_url(alphacoders_url))
+    print(get_wallpaper_url(url=alphacoders_url))
+
