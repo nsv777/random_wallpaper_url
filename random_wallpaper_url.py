@@ -25,7 +25,7 @@ class Wallpaper(object):
         scraper_text = self.scraper.get(f"{url}/random.php", headers=headers).text
         soup = BeautifulSoup(scraper_text, features="lxml")
 
-        return soup.find("a", {"href": re.compile('big\.php\?i=\d+')})["href"]
+        return soup.find("a", {"href": re.compile('big\\.php\\?i=\\d+')})["href"]
 
     def get_wallpaper_url(self, url: str) -> str:
         big_url = self._get_big_url(url=url)
