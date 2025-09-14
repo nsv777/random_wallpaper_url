@@ -21,7 +21,7 @@ class Wallpaper(object):
         self.session = requests.session()
         self.scraper = cloudscraper.create_scraper(delay=20, browser=browser, sess=self.session)
 
-    def _get_big_url(self, url: str):
+    def _get_big_url(self, url: str) -> str:
         scraper_text = self.scraper.get(f"{url}/random.php", headers=headers).text
         soup = BeautifulSoup(scraper_text, features="lxml")
 
@@ -29,8 +29,7 @@ class Wallpaper(object):
 
     def get_wallpaper_url(self, url: str) -> str:
         big_url = self._get_big_url(url=url)
-        soup = BeautifulSoup(self.scraper.get(f"{url}{big_url}", headers=headers).text,
-                             features="lxml")
+        soup = BeautifulSoup(self.scraper.get(big_url, headers=headers).text, features="lxml")
 
         return soup.find("picture").find("img", {"id": "main-content"})["src"]
 

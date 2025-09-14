@@ -2,17 +2,17 @@
 Retrieves random wallpaper URL from https://wall.alphacoders.com/
 The URL then could be used with any external downloader
 
-```terminal
+```shell
 wget $(python random_wallpaper_url.py)
 ``` 
 Shell script example which could be used to periodically change desktop background (**feh** need to be present in the system):
 
-```
+```shell
 wget --limit-rate=20k -O /tmp/background.jpg $(python random_wallpaper_url.py) && DISPLAY=":0" feh --bg-fill /tmp/background.jpg
 ```
 
 In case of gnome-shell (tested in Ubuntu 20.04):
-```
+```shell
 #!/usr/bin/env bash
 PID=$(pgrep -f 'gnome-session' | head -n1)
 export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
